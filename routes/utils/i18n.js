@@ -47,7 +47,7 @@ module.exports = {
     "format": function(event, body) {
       if (event.startsWith('task.')) {
         var __tmp =  get_task(event, body);
-        return util.format('%s %s %s', body.user.name, __tmp, body.task.url);
+        return util.format('_%s_ %s <%s|查看任务>', body.user.name, __tmp, body.task.url);
       }
     }
   }
