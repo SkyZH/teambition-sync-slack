@@ -5,3 +5,5 @@ apps:
     watch  : true
     env    :
       PORT : 3000
+    env_production:
+      PORT : 3000
