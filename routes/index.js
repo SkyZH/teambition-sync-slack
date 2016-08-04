@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
 
   if (__hash == req.query.sign) {
     var __ret = i18n_cn.format(req.body.event, req.body.data);
-    if (__ret === "") {
+    if (__ret !== "") {
       post_data(__ret, c_cb(res));
     } else {
       res.status(200).json({});
