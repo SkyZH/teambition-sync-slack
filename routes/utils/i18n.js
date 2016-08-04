@@ -76,10 +76,20 @@ module.exports = {
               if (err) throw err;
               __task = task;
               teambition.get_stages(task._tasklistId, this);
-            }, function(err, stages) {
+            },
+            function(err, stages) {
+              if (err) throw err;
+              var group = this.group();
               stage = _.find(stages, function(o) { return o._id == __task._stageId; });
               var text = util.format('_%s_ 在 %s 中 %s <%s|查看任务>', body.user.name, stage.name, result, body.task.url);
-              post_data(text, config.slack.channel, cb);
+              post_data(text, config.slack.channel, group());
+              var __channel_id = util.format("%s:%s", __task._tasklistId, __task._stageId);
+              if (__channel_id in config.sync) {
+                post_data(text, config.sync[__channel_id], group());
+              }
+            },
+            function(err, results) {
+              cb(err, results);
             }
           );
         });

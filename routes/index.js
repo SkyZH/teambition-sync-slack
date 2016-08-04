@@ -8,12 +8,6 @@ const i18n_cn = require('./utils/i18n').zh_cn;
 
 var router = express.Router();
 
-function c_cb(e_res) {
-  return function(err, res) {
-    e_res.status(200).json({});
-  };
-}
-
 router.post('/', function(req, res, next) {
   var keys = [config.teambition.client_secret, req.query.timestamp, req.query.nonce];
   keys.sort();

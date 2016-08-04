@@ -1,5 +1,5 @@
 const Slack = require('slack-node');
-const config = require('../config');
+const config = require('../../config');
 
 var slack = new Slack();
 
