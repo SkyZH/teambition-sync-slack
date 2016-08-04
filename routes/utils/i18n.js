@@ -5,11 +5,11 @@ moment.locale("zh-CN");
 
 function get_priority(priority) {
   switch (priority) {
-    case "0":
+    case "normal":
       return "普通";
-    case "1":
+    case "high":
       return "紧急";
-    case "2":
+    case "urgent":
       return "非常紧急";
   }
 }
@@ -34,7 +34,7 @@ function get_task(event, body) {
     case "task.update.executor":
       return util.format('指派任务 *%s* 给 %s', body.task.content, body.task.executor.name);
     case "task.update.dueDate":
-      return util.format('设定任务 *%s* 的截止时间为 %s (%s)', body.task.content, moment(body.task.dueDate).format('YYYY MM DD'), moment().to(body.task.dueDate));
+      return util.format('设定任务 *%s* 的截止时间为 %s (%s)', body.task.content, moment(body.task.dueDate).format('LLLL'), moment().to(body.task.dueDate));
     case "task.update.priority":
       return util.format('设定任务 *%s* 的优先级为 %s', body.task.content, get_priority(body.task.priority));
     default:
