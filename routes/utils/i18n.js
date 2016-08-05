@@ -81,7 +81,7 @@ module.exports = {
               if (err) throw err;
               var group = this.group(), __stagename = "", __taskurl = "";
               stage = _.find(stages, function(o) { return o._id == __task._stageId; });
-              if (stage) __stagename = util.format("在 %s 中 ", __stagename);
+              if (stage) __stagename = util.format("在 %s 中 ", stage.name);
               if (body.task.url) __taskurl = util.format("<%s|查看任务>", body.task.url);
               var text = util.format('_%s_ %s%s %s', body.user.name, __stagename, result, __taskurl);
               var __channel_id = util.format("%s:%s", __task._tasklistId, __task._stageId);
