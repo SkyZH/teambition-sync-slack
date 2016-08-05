@@ -79,13 +79,16 @@ module.exports = {
             },
             function(err, stages) {
               if (err) throw err;
-              var group = this.group();
+              var group = this.group(), __stagename = "", __taskurl = "";
               stage = _.find(stages, function(o) { return o._id == __task._stageId; });
-              var text = util.format('_%s_ 在 %s 中 %s <%s|查看任务>', body.user.name, stage.name, result, body.task.url);
-              post_data(text, config.slack.channel, group());
+              if (stage) __stagename = util.format("在 %s 中 ", __stagename);
+              if (body.task.url) __taskurl = util.format("<%s|查看任务>", body.task.url);
+              var text = util.format('_%s_ %s%s %s', body.user.name, __stagename, result, __taskurl);
               var __channel_id = util.format("%s:%s", __task._tasklistId, __task._stageId);
               if (__channel_id in config.sync) {
                 post_data(text, config.sync[__channel_id], group());
+              } else {
+                post_data(text, config.slack.channel, group());
               }
             },
             function(err, results) {
