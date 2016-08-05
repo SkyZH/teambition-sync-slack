@@ -39,7 +39,7 @@ function get_task(event, body, cb) {
       cb(null, util.format('把 %s 重命名为 *%s*', body.old.content, body.task.content));
       break;
     case "task.move":
-      cb(null, til.format('把 *%s* 移动到了 %s', body.task.content, body.stage.name));
+      cb(null, util.format('把 *%s* 移动到了 %s', body.task.content, body.stage.name));
       break;
     case "task.done":
       if (body.task.isDone) {
